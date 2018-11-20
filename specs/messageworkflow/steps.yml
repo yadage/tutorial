@@ -1,0 +1,25 @@
+messagewriter:
+  process:
+    process_type: interpolated-script-cmd
+    script: |
+      /code/message_writer '{message}' {outputfile}
+  publisher:
+    publisher_type: interpolated-pub
+    publish:
+      msgfile: '{outputfile}'
+  environment:
+    environment_type: docker-encapsulated
+    image: yadage/tutorial-messagewriter
+
+upppermaker:
+  process:
+    process_type: interpolated-script-cmd
+    script: |
+      python /code/uppermaker.py {inputfile} {outputfile}
+  publisher:
+    publisher_type: interpolated-pub
+    publish:
+      shoutingfile: '{outputfile}'
+  environment:
+    environment_type: docker-encapsulated
+    image: yadage/tutorial-uppermaker
