@@ -165,10 +165,26 @@ to do and let a "workflow engine", i.e. `yadage`, figure out *how* to do it.
 
 ## Writing Individual Job Templates
 
-In order to make re-usable workflows we need to not only know concrete commands
-but rather "command templates" such that we can use these templates to create
-*new commands* once we e.g. have the correct inputs available.
+Looking at the commands above, we notice that a lot of the commands we executed depended on some specifics
+of how we ran the containers and the exact paths of files we use as input and output. 
 
+In order to make re-usable workflows we need to replace the concrete commands
+but rather "command templates" such that we or the workflow engine can use these
+templates to create *new commands* once we e.g. have the correct inputs available.
+
+In order to fully specify *what* we want to do we need to provide three ingredients
+
+1. The Command Template: a parametrized version of the command line 
+2. An Output Specification: What are we achieving with running the command
+   constructed from 1.
+   I.e. what are the interesting files that are being produced here.
+3. An Environment Specification: Where do we run this command? Here we can
+   specify the Docker image which holds the right program within itself.
+
+
+### The Message Task
+
+A simple example of the message writing task we ran above is shown below:
 
 ```yaml
 messagewriter:
@@ -185,26 +201,40 @@ messagewriter:
     image: yadage/tutorial-messagewriter
 ```
 
+
+We can check that we wrote this specification correctly by running:
 ```
 packtivity-validate steps.yml#/messagewriter
 ```
 
+which should show
 ```
 packtivity definition is valid
 ```
 
+We can now execute this task by passing only the `message` and `outputfile` parameters as well as a writable directory
+without needing to specify the command or interacting with `docker` at all.
+
 ```
 packtivity-run steps.yml#/messagewriter -p message="Hi there." -p outputfile="'{workdir}/outputfile.txt'" --write first
-    ```
+<TypedLeafs: {u'msgfile': u'/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/outputfile.txt'}> (prepublished)
+2018-11-20 23:04:30,392 | pack.packtivity_sync |   INFO | starting file logging for topic: step
+<TypedLeafs: {u'msgfile': u'/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/outputfile.txt'}> (post-run)
+```
 
-
+The last line shows what the interesting output of this task is. hen we look at it we see our message
 ```
 cat first/outputfile.txt 
+```
+which shows
 
 ```
 Hello, the message was: Hi there.
 ```
 
+### The Shouting Task
+
+We can do the same thing for the task that converts a file into upper case:
 
 
 ```
@@ -235,20 +265,38 @@ upppermaker:
     image: yadage/tutorial-uppermaker
 ```
 
+which we can similarly run. In contrast to the first command line we pass in not only a 
+writable directory (`second`) but also a directory from which we read in the data (`first`)
+
+`packtivity-run` will then handle running the `docker commands` with the volume mounts and commands
 
 ```
 packtivity-run steps.yml#/upppermaker -p inputfile="$PWD/first/outputfile.txt" -p outputfile="'{workdir}/outputfile.txt'" --write second --read first
 ```
 
+We can now see the output file
+
 ```
 cat second/outputfile.txt
 ```
-
+which shows
 ```
 HELLO, THE MESSAGE WAS: HI THERE.
 ```
 
+So have we achieved? We still need to run two tasks manually, but the information of how the commands are constructed and which environment
+is needed is all stored in a text file that can be shared across users. 
+
+In the next step we will declaratively describe the workflow of running the two tasks in order and how to wire the output
+of one task to be the input of the next task.
+
 ## Writing the Workflow
+
+A workflow can be represented as a *directed acyclic graph* of tasks. In order to describe the workflow, 
+we define a set of "stages" which serve as a recipe on how to construct such a graph, i.e. which nodes and
+which edges need to be added to the graph.
+
+Write this into a file `workflow.yml`
 
 ```yaml
 stages:
@@ -270,23 +318,35 @@ stages:
     step: {$ref: 'steps.yml#/upppermaker'}
 ```
 
+We can now run the following command using `yadage-run`, where the only thing we pass is the `msg`
+parameter to the workflow. This workflow input will then serve as the `message` parameter of the
+first stage (the `outputfile` parameter is hardcoded into the workflow spec.)
+
+The result of the task scheduled by the `writing_stage` will be the file published under the `msgfile`
+(as defined in the publisher of the `steps.yml#/messagewriter` job template)
+
+For the second task the `msgfile` output is then tied to the `inputfile` parmeter of the `steps.yml#/upppermaker`
+task. Again, the output file is hardcoded.
+
+
+The full command looks now like this:
 
 ```
 yadage-run workdir workflow.yml -p msg='Hi there.' --visualize
 ```
 
-```
-cat workdir/writing_stage/outputfile.txt
-```
+Notice how all details of the workflow: which tasks to run, in which order to run them, the software environments
+for each task, the commands of the tasks are all stored in text files now that are archivable and sharable. The 
+execution of this workflow only requires a single `msg` parameter.
+
+After the workflow runs we can see the outputs of both tasks in the work directory:
 
 ```
+cat workdir/writing_stage/outputfile.txt
 Hello, the message was: Hi there.
 ```
 
 ```
 cat workdir/shouting_stage/outputfile.txt
-```
-
-```
 HELLO, THE MESSAGE WAS: HI THERE.
 ```
