@@ -46,6 +46,9 @@ after the other.
 
 ## Building Docker Images
 
+*Note for LXPLUS* Image building is not yet suppored there. Feel free to read 
+along or try this out on your personal laptop.
+
 One of the main ideas of yadage is to orchestrate workflows where each step
 in the workflow runs in its own sandbox. This efficiently separates the domain-
 specific code in the sandbox from the workflow logic.
