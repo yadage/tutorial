@@ -27,17 +27,97 @@ source ~recast/public/setup.sh
 ```
 
 
+## Where is this going?
+
+In this tutorial we will build a simple workflow that runs two tasks one 
+after the other.
+
+1. The first task runs a program that takes in a message string and writes
+   it out to an output file
+   
+   The program that does this is written in C++
+
+
+2. The second tasks reads in the file written by the first task and transforms
+   its contents into all upper case letters
+
+   The program for this step is writte in Python.
+
+
 ## Building Docker Images
 
-One of the main tasks
+One of the main ideas of yadage is to orchestrate workflows where each step
+in the workflow runs in its own sandbox. This efficiently separates the domain-
+specific code in the sandbox from the workflow logic.
+
+As a sandboxing technology Linux Containers that you can e.g. build with `docker` are 
+very popular. For this tutorial we are building two container images, one for
+the C++ program and one for the Python program.
+
+The images are already built and available at 
+
+https://hub.docker.com/r/yadage/tutorial-messagewriter/
+
+and 
+
+https://hub.docker.com/r/yadage/tutorial-uppermaker/
+
+if you want to build them yourself you can do
 
 ```bash
-git 
-docker build -t yadage/tutorial/messagewriter .
+cd images/message_writer
+docker build -t <username>/tutorial-messagewriter .
+docker push <username>/tutorial-messagewriter
 ```
 
+or
+
+```
+cd images/message_writer
+docker build -t <username>/tutorial-uppermaker .
+docker push <username>/tutorial-uppermaker
+```
+
+where `<username>` is your Docker Hub username. This will assemble the
+Docker images on your laptop (`docker build`). In the case of the C++
+program it will compile the program while for the Python program it will
+simply copy the program into the container image.
+
+The images then contain all dependencies. That is, not only the programs
+themselves but also the operating system and programming language runtime
+(C++ and Python respectively) needed to *execute* the programs as well.
+
+### Testing the images
+
+As the images include all dependencies we can now 'pull' the Docker image
+on any other computer and run the programs
+
+```
+docker run --rm -it yadage/tutorial-messagewriter sh
+/code # /code/message_writer hello outputfile.txt
+Hello World. We will write this message: hello
+Done! try looking into outputfile.txt
+/code # cat outputfile.txt 
+Hello, the message was: hello
+/code # exit
+```
+
+```
+/ # echo shout this > input.txt
+/ # python /code/uppermaker.py input.txt output.txt
+INFO:uppermaker:Hello There, we will take the contents of input.txt
+INFO:uppermaker:and make them all UPPER CASE!!
+INFO:uppermaker:Find the result in output.txt
+/ # cat output.txt 
+SHOUT THIS
+/ # exit
+```
 
 ## Writing Individual Job Templates
+
+
+
+
 
 ```yaml
 messagewriter:
