@@ -102,6 +102,15 @@ Hello, the message was: hello
 /code # exit
 ```
 
+Note, how after you exit all traces of the container and the output file you just created
+are gone. The advantage of Linux Container technology is *isolation* and containers
+that you run using `docker run` are *ephemeral*.
+
+Each new container that you run using `docker run` starts off in exactly the same state, 
+which is great for reproducibility. 
+
+We can also test the second container image
+
 ```
 / # echo shout this > input.txt
 / # python /code/uppermaker.py input.txt output.txt
@@ -113,10 +122,52 @@ SHOUT THIS
 / # exit
 ```
 
+#### Sharing State
+
+While the ephemeral nature of containers is nice, sometimes you do want to persist some
+data that you created within the container, perhaps because you want to do something else
+with this. For this we can *loosen* the strict isolation of the container a bit and
+'mount* a directory from the host computer into the container
+
+```
+docker run --rm -it -v $PWD/savehere:/data yadage/tutorial-messagewriter sh
+/code # /code/message_writer hello /data/outputfile.txt
+/code # cat /data/outputfile.txt 
+Hello, the message was: hello
+/code # exit
+```
+
+`-v  $PWD/savehere:/data` instructs docker to map the `$PWD/savehere` directory on your
+host computer into the `/data` directory within the container. So files that you write 
+into `/data` within the container get persisted.
+
+We can now see the output file in `savehere/outputfile.txt`
+``` 
+cat savehere/outputfile.txt
+Hello, the message was: hello
+```
+
+```
+docker run --rm -it -v $PWD/savehere:/data yadage/tutorial-uppermaker sh
+/ # python /code/uppermaker.py /data/outputfile.txt /data/secondfile.txt
+/ # exit
+cat savehere/secondfile.txt 
+HELLO, THE MESSAGE WAS: HELLO
+```
+
+This seems great! we can use pre-packaged software archived in docker images to run the series of commands
+that we want. But we had to manage a lot of things by hand: e.g. running Docker with the right flags to 
+persist the data and executing the commands in the right order. I.e. we needed to exactly know *how* to do 
+these things, which is sometimes referred to as a "imperative style" or computing.
+
+In the following we will now introduce a more "declarative" style in which we only specify *what* we want
+to do and let a "workflow engine", i.e. `yadage`, figure out *how* to do it.
+
 ## Writing Individual Job Templates
 
-
-
+In order to make re-usable workflows we need to not only know concrete commands
+but rather "command templates" such that we can use these templates to create
+*new commands* once we e.g. have the correct inputs available.
 
 
 ```yaml
