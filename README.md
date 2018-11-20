@@ -46,8 +46,7 @@ after the other.
 
 ## Building Docker Images
 
-*Note for LXPLUS* Image building is not yet suppored there. Feel free to read 
-along or try this out on your personal laptop.
+**Note for LXPLUS** Image building is not yet suppored there. Feel free to read along or try this out on your personal laptop, or if you want to jump to the next section go to [**Writing Individual Job Templates**](https://github.com/yadage/tutorial#writing-individual-job-templates).
 
 One of the main ideas of yadage is to orchestrate workflows where each step
 in the workflow runs in its own sandbox. This efficiently separates the domain-
