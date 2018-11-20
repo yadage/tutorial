@@ -234,10 +234,10 @@ Hello, the message was: Hi there.
 
 ### The Shouting Task
 
-We can do the same thing for the task that converts a file into upper case:
+We can do the same thing for the task that converts a file into upper case. We add the second
+spec `uppermaker` to `steps.yml`
 
-
-```
+```yaml
 messagewriter:
   process:
     process_type: interpolated-script-cmd
@@ -265,7 +265,14 @@ upppermaker:
     image: yadage/tutorial-uppermaker
 ```
 
-which we can similarly run. In contrast to the first command line we pass in not only a 
+We can check again that we defined this correctly (at least syntax-wise)
+
+```
+packtivity-validate steps.yml#/upppermaker
+packtivity definition is valid
+```
+
+We can now run this task like the one before. In contrast to the first command line we pass in not only a 
 writable directory (`second`) but also a directory from which we read in the data (`first`)
 
 `packtivity-run` will then handle running the `docker commands` with the volume mounts and commands
@@ -317,6 +324,13 @@ stages:
       outputfile: '{workdir}/outputfile.txt'
     step: {$ref: 'steps.yml#/upppermaker'}
 ```
+
+We can check that we did everything right via
+
+```
+yadage-validate workflow.yml
+```
+
 
 We can now run the following command using `yadage-run`, where the only thing we pass is the `msg`
 parameter to the workflow. This workflow input will then serve as the `message` parameter of the
