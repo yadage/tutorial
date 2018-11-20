@@ -1,0 +1,18 @@
+stages:
+- name: writing_stage
+  dependencies: [init]
+  scheduler:
+    scheduler_type: singlestep-stage
+    parameters:
+      message: {step: init, output: msg}
+      outputfile: '{workdir}/outputfile.txt'
+    step: {$ref: 'steps.yml#/messagewriter'}
+- name: shouting_stage
+  dependencies: [writing_stage]
+  scheduler:
+    scheduler_type: singlestep-stage
+    parameters:
+      inputfile: {step: writing_stage, output: msgfile}
+      outputfile: '{workdir}/outputfile.txt'
+    step: {$ref: 'steps.yml#/upppermaker'}
+  
