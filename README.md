@@ -255,7 +255,7 @@ upppermaker:
   process:
     process_type: interpolated-script-cmd
     script: |
-      /code/uppermaker.py {inputfile} {outputfile}
+      python /code/uppermaker.py {inputfile} {outputfile}
   publisher:
     publisher_type: interpolated-pub
     publish:
