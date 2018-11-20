@@ -187,7 +187,8 @@ In order to fully specify *what* we want to do we need to provide three ingredie
 
 ### The Message Task
 
-A simple example of the message writing task we ran above is shown below:
+A simple example of the message writing task we ran above is shown below. Put this into
+a file `steps.yml`.
 
 ```yaml
 messagewriter:
