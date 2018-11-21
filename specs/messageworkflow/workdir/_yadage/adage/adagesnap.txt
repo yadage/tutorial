@@ -1,0 +1,11 @@
+========== ADAGE LOG BEGIN at 2018-11-20T22:25:22.606059 ==========
+---------- snapshot at 2018-11-20T22:25:22.606209
+---------- snapshot at 2018-11-20T22:25:23.430708
+name: init obj: </init:0|defined|known> submitted: True
+name: writing_stage obj: </writing_stage:0|defined|known> submitted: False
+name: shouting_stage obj: </shouting_stage:0|defined|known> submitted: False
+---------- snapshot at 2018-11-20T22:25:37.795457
+name: init obj: </init:0|success|known> submitted: True
+name: writing_stage obj: </writing_stage:0|success|known> submitted: True
+name: shouting_stage obj: </shouting_stage:0|success|known> submitted: True
+========== ADAGE LOG END at 2018-11-20T22:25:37.796785 ==========

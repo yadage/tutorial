@@ -1,0 +1,4 @@
+2018-11-20 22:25:30,512 | pack.shouting_stage. |   INFO | starting file logging for topic: run
+2018-11-20 22:25:31,564 | pack.shouting_stage. |   INFO | INFO:uppermaker:Hello There, we will take the contents of /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/outputfile.txt
+2018-11-20 22:25:31,566 | pack.shouting_stage. |   INFO | INFO:uppermaker:and make them all UPPER CASE!!
+2018-11-20 22:25:31,569 | pack.shouting_stage. |   INFO | INFO:uppermaker:Find the result in /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage/outputfile.txt

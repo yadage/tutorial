@@ -1,0 +1,4 @@
+2018-11-20 22:25:23,881 | pack.writing_stage.p |   INFO | starting file logging for topic: pull
+2018-11-20 22:25:26,318 | pack.writing_stage.p |   INFO | latest: Pulling from yadage/tutorial-messagewriter
+2018-11-20 22:25:26,319 | pack.writing_stage.p |   INFO | Digest: sha256:11a10c950a0e1971affe60e9d4dda9ccb43f995c8b5f4908e1b906be9936c370
+2018-11-20 22:25:26,320 | pack.writing_stage.p |   INFO | Status: Image is up to date for yadage/tutorial-messagewriter:latest

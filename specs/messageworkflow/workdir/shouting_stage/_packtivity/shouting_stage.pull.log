@@ -1,0 +1,4 @@
+2018-11-20 22:25:28,068 | pack.shouting_stage. |   INFO | starting file logging for topic: pull
+2018-11-20 22:25:30,503 | pack.shouting_stage. |   INFO | latest: Pulling from yadage/tutorial-uppermaker
+2018-11-20 22:25:30,504 | pack.shouting_stage. |   INFO | Digest: sha256:c1b0894a54c6d8c6d3a419365415cd659ef9a0dee3f6acb024305fda67b4b5e5
+2018-11-20 22:25:30,505 | pack.shouting_stage. |   INFO | Status: Image is up to date for yadage/tutorial-uppermaker:latest

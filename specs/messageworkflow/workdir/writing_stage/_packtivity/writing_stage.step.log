@@ -1,0 +1,62 @@
+2018-11-20 22:25:23,749 | pack.writing_stage.s |   INFO | starting file logging for topic: step
+2018-11-20 22:25:23,879 | pack.writing_stage.s |  DEBUG | script is:
+2018-11-20 22:25:23,879 | pack.writing_stage.s |  DEBUG | 
+--------------
+/code/message_writer 'Hi there.' /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/outputfile.txt
+
+--------------
+2018-11-20 22:25:23,880 | pack.writing_stage.s |  DEBUG | 
+--------------
+run in docker container image: yadage/tutorial-messagewriter
+with env: default env
+resources: []
+--------------
+    
+2018-11-20 22:25:23,880 | pack.writing_stage.s |  DEBUG | do_auth: False do_cvmfs: False
+2018-11-20 22:25:23,880 | pack.writing_stage.s |  DEBUG | rspec is
+{
+    "mounts": [
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/init", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/init", 
+            "type": "bind"
+        }
+    ], 
+    "image": "yadage/tutorial-messagewriter:latest", 
+    "workdir": null, 
+    "argv": [
+        "sh", 
+        "-c", 
+        "sh"
+    ], 
+    "stdin": "/code/message_writer 'Hi there.' /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/outputfile.txt\n"
+}
+2018-11-20 22:25:23,880 | pack.writing_stage.s |  DEBUG | command: 
+docker pull yadage/tutorial-messagewriter:latest
+2018-11-20 22:25:23,880 | pack.writing_stage.s |  DEBUG | stdin if any: None
+2018-11-20 22:25:23,893 | pack.writing_stage.s |  DEBUG | started subprocess with pid 36102. now wait to finish
+2018-11-20 22:25:24,412 | pack.writing_stage.s |  DEBUG | process children: []
+2018-11-20 22:25:26,322 | pack.writing_stage.s |  DEBUG | container execution subprocess finished. return code: 0
+2018-11-20 22:25:26,322 | pack.writing_stage.s |  DEBUG | moving on from subprocess execution: docker pull yadage/tutorial-messagewriter:latest
+2018-11-20 22:25:26,323 | pack.writing_stage.s |  DEBUG | finally for docker pull yadage/tutorial-messagewriter:latest
+2018-11-20 22:25:26,323 | pack.writing_stage.s |  DEBUG | command: 
+docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/_packtivity/writing_stage.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/init:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/init:rw yadage/tutorial-messagewriter:latest sh -c sh
+2018-11-20 22:25:26,323 | pack.writing_stage.s |  DEBUG | stdin if any: /code/message_writer 'Hi there.' /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/outputfile.txt
+
+2018-11-20 22:25:26,324 | pack.writing_stage.s |  DEBUG | stdin: 
+/code/message_writer 'Hi there.' /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/outputfile.txt
+
+2018-11-20 22:25:26,325 | pack.writing_stage.s |  DEBUG | argv: ['docker', 'run', '--rm', '-i', '--cidfile', '/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/_packtivity/writing_stage.cid', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/init:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/init:rw', 'yadage/tutorial-messagewriter:latest', 'sh', '-c', 'sh']
+2018-11-20 22:25:26,332 | pack.writing_stage.s |  DEBUG | started subprocess with pid 36104. now wait to finish
+2018-11-20 22:25:26,853 | pack.writing_stage.s |  DEBUG | process children: []
+2018-11-20 22:25:27,713 | pack.writing_stage.s |  DEBUG | container execution subprocess finished. return code: 0
+2018-11-20 22:25:27,714 | pack.writing_stage.s |  DEBUG | moving on from subprocess execution: docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/_packtivity/writing_stage.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/init:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/init:rw yadage/tutorial-messagewriter:latest sh -c sh
+2018-11-20 22:25:27,714 | pack.writing_stage.s |  DEBUG | finally for docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/_packtivity/writing_stage.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/init:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/init:rw yadage/tutorial-messagewriter:latest sh -c sh
+2018-11-20 22:25:27,737 | pack.writing_stage.s |   INFO | publishing data: <TypedLeafs: {u'msgfile': u'/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/outputfile.txt'}>

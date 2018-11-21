@@ -1,0 +1,4 @@
+2018-11-20 22:16:20,320 | pack.packtivity_sync |   INFO | starting file logging for topic: pull
+2018-11-20 22:16:22,683 | pack.packtivity_sync |   INFO | latest: Pulling from yadage/tutorial-uppermaker
+2018-11-20 22:16:22,684 | pack.packtivity_sync |   INFO | Digest: sha256:c1b0894a54c6d8c6d3a419365415cd659ef9a0dee3f6acb024305fda67b4b5e5
+2018-11-20 22:16:22,684 | pack.packtivity_sync |   INFO | Status: Image is up to date for yadage/tutorial-uppermaker:latest

@@ -1,0 +1,56 @@
+2018-11-20 23:04:30,392 | pack.packtivity_sync |   INFO | starting file logging for topic: step
+2018-11-20 23:04:30,554 | pack.packtivity_sync |  DEBUG | script is:
+2018-11-20 23:04:30,554 | pack.packtivity_sync |  DEBUG | 
+--------------
+/code/message_writer 'Hi there.' /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/outputfile.txt
+
+--------------
+2018-11-20 23:04:30,554 | pack.packtivity_sync |  DEBUG | 
+--------------
+run in docker container image: yadage/tutorial-messagewriter
+with env: default env
+resources: []
+--------------
+    
+2018-11-20 23:04:30,554 | pack.packtivity_sync |  DEBUG | do_auth: False do_cvmfs: False
+2018-11-20 23:04:30,554 | pack.packtivity_sync |  DEBUG | rspec is
+{
+    "mounts": [
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first", 
+            "type": "bind"
+        }
+    ], 
+    "image": "yadage/tutorial-messagewriter:latest", 
+    "workdir": null, 
+    "argv": [
+        "sh", 
+        "-c", 
+        "sh"
+    ], 
+    "stdin": "/code/message_writer 'Hi there.' /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/outputfile.txt\n"
+}
+2018-11-20 23:04:30,554 | pack.packtivity_sync |  DEBUG | command: 
+docker pull yadage/tutorial-messagewriter:latest
+2018-11-20 23:04:30,554 | pack.packtivity_sync |  DEBUG | stdin if any: None
+2018-11-20 23:04:30,561 | pack.packtivity_sync |  DEBUG | started subprocess with pid 38235. now wait to finish
+2018-11-20 23:04:31,108 | pack.packtivity_sync |  DEBUG | process children: []
+2018-11-20 23:04:33,023 | pack.packtivity_sync |  DEBUG | container execution subprocess finished. return code: 0
+2018-11-20 23:04:33,024 | pack.packtivity_sync |  DEBUG | moving on from subprocess execution: docker pull yadage/tutorial-messagewriter:latest
+2018-11-20 23:04:33,024 | pack.packtivity_sync |  DEBUG | finally for docker pull yadage/tutorial-messagewriter:latest
+2018-11-20 23:04:33,024 | pack.packtivity_sync |  DEBUG | command: 
+docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/_packtivity/packtivity_syncbackend.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first:rw yadage/tutorial-messagewriter:latest sh -c sh
+2018-11-20 23:04:33,024 | pack.packtivity_sync |  DEBUG | stdin if any: /code/message_writer 'Hi there.' /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/outputfile.txt
+
+2018-11-20 23:04:33,025 | pack.packtivity_sync |  DEBUG | stdin: 
+/code/message_writer 'Hi there.' /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/outputfile.txt
+
+2018-11-20 23:04:33,025 | pack.packtivity_sync |  DEBUG | argv: ['docker', 'run', '--rm', '-i', '--cidfile', '/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/_packtivity/packtivity_syncbackend.cid', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first:rw', 'yadage/tutorial-messagewriter:latest', 'sh', '-c', 'sh']
+2018-11-20 23:04:33,034 | pack.packtivity_sync |  DEBUG | started subprocess with pid 38237. now wait to finish
+2018-11-20 23:04:33,558 | pack.packtivity_sync |  DEBUG | process children: []
+2018-11-20 23:04:34,476 | pack.packtivity_sync |  DEBUG | container execution subprocess finished. return code: 0
+2018-11-20 23:04:34,476 | pack.packtivity_sync |  DEBUG | moving on from subprocess execution: docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/_packtivity/packtivity_syncbackend.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first:rw yadage/tutorial-messagewriter:latest sh -c sh
+2018-11-20 23:04:34,476 | pack.packtivity_sync |  DEBUG | finally for docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/_packtivity/packtivity_syncbackend.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first:rw yadage/tutorial-messagewriter:latest sh -c sh
+2018-11-20 23:04:34,497 | pack.packtivity_sync |   INFO | publishing data: <TypedLeafs: {u'msgfile': u'/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/outputfile.txt'}>

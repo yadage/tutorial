@@ -1,0 +1,62 @@
+2018-11-20 22:25:27,911 | pack.shouting_stage. |   INFO | starting file logging for topic: step
+2018-11-20 22:25:28,066 | pack.shouting_stage. |  DEBUG | script is:
+2018-11-20 22:25:28,067 | pack.shouting_stage. |  DEBUG | 
+--------------
+python /code/uppermaker.py /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/outputfile.txt /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage/outputfile.txt
+
+--------------
+2018-11-20 22:25:28,067 | pack.shouting_stage. |  DEBUG | 
+--------------
+run in docker container image: yadage/tutorial-uppermaker
+with env: default env
+resources: []
+--------------
+    
+2018-11-20 22:25:28,067 | pack.shouting_stage. |  DEBUG | do_auth: False do_cvmfs: False
+2018-11-20 22:25:28,068 | pack.shouting_stage. |  DEBUG | rspec is
+{
+    "mounts": [
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage", 
+            "type": "bind"
+        }
+    ], 
+    "image": "yadage/tutorial-uppermaker:latest", 
+    "workdir": null, 
+    "argv": [
+        "sh", 
+        "-c", 
+        "sh"
+    ], 
+    "stdin": "python /code/uppermaker.py /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/outputfile.txt /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage/outputfile.txt\n"
+}
+2018-11-20 22:25:28,068 | pack.shouting_stage. |  DEBUG | command: 
+docker pull yadage/tutorial-uppermaker:latest
+2018-11-20 22:25:28,068 | pack.shouting_stage. |  DEBUG | stdin if any: None
+2018-11-20 22:25:28,079 | pack.shouting_stage. |  DEBUG | started subprocess with pid 36105. now wait to finish
+2018-11-20 22:25:28,599 | pack.shouting_stage. |  DEBUG | process children: []
+2018-11-20 22:25:30,510 | pack.shouting_stage. |  DEBUG | container execution subprocess finished. return code: 0
+2018-11-20 22:25:30,510 | pack.shouting_stage. |  DEBUG | moving on from subprocess execution: docker pull yadage/tutorial-uppermaker:latest
+2018-11-20 22:25:30,510 | pack.shouting_stage. |  DEBUG | finally for docker pull yadage/tutorial-uppermaker:latest
+2018-11-20 22:25:30,511 | pack.shouting_stage. |  DEBUG | command: 
+docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage/_packtivity/shouting_stage.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:rw yadage/tutorial-uppermaker:latest sh -c sh
+2018-11-20 22:25:30,511 | pack.shouting_stage. |  DEBUG | stdin if any: python /code/uppermaker.py /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/outputfile.txt /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage/outputfile.txt
+
+2018-11-20 22:25:30,512 | pack.shouting_stage. |  DEBUG | stdin: 
+python /code/uppermaker.py /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/outputfile.txt /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage/outputfile.txt
+
+2018-11-20 22:25:30,514 | pack.shouting_stage. |  DEBUG | argv: ['docker', 'run', '--rm', '-i', '--cidfile', '/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage/_packtivity/shouting_stage.cid', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:rw', 'yadage/tutorial-uppermaker:latest', 'sh', '-c', 'sh']
+2018-11-20 22:25:30,526 | pack.shouting_stage. |  DEBUG | started subprocess with pid 36114. now wait to finish
+2018-11-20 22:25:31,045 | pack.shouting_stage. |  DEBUG | process children: []
+2018-11-20 22:25:32,130 | pack.shouting_stage. |  DEBUG | container execution subprocess finished. return code: 0
+2018-11-20 22:25:32,130 | pack.shouting_stage. |  DEBUG | moving on from subprocess execution: docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage/_packtivity/shouting_stage.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:rw yadage/tutorial-uppermaker:latest sh -c sh
+2018-11-20 22:25:32,130 | pack.shouting_stage. |  DEBUG | finally for docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage/_packtivity/shouting_stage.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage:rw yadage/tutorial-uppermaker:latest sh -c sh
+2018-11-20 22:25:32,152 | pack.shouting_stage. |   INFO | publishing data: <TypedLeafs: {u'shoutingfile': u'/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/shouting_stage/outputfile.txt'}>

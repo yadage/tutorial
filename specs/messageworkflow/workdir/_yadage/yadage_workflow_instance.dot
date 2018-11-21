@@ -1,0 +1,40 @@
+digraph G {
+subgraph cluster_ {
+color=blue;
+label="";
+style=solid;
+subgraph cluster_shouting_stage {
+color=grey;
+label=shouting_stage;
+labeljust=l;
+style=dashed;
+"453069ec-a1b8-44da-a683-b3abf2881926" [color=blue, label="shouting_stage[0]", shape=box];
+"453069ec-a1b8-44da-a683-b3abf2881926__shoutingfile" [color=red, label="[shoutingfile]"];
+"453069ec-a1b8-44da-a683-b3abf2881926" -> "453069ec-a1b8-44da-a683-b3abf2881926__shoutingfile";
+}
+
+subgraph cluster_init {
+color=grey;
+label=init;
+labeljust=l;
+style=dashed;
+}
+
+"dda5ded4-eb47-40ac-9de0-79ed7e9f555d" [color=blue, fixedsize=True, height=0.2, label="", shape=diamond, width=0.2];
+"dda5ded4-eb47-40ac-9de0-79ed7e9f555d__msg" [color=red, label="[msg]"];
+"dda5ded4-eb47-40ac-9de0-79ed7e9f555d" -> "dda5ded4-eb47-40ac-9de0-79ed7e9f555d__msg";
+subgraph cluster_writing_stage {
+color=grey;
+label=writing_stage;
+labeljust=l;
+style=dashed;
+"5c0cfabc-04ea-473f-89f0-cd9e1314c699" [color=blue, label="writing_stage[0]", shape=box];
+"5c0cfabc-04ea-473f-89f0-cd9e1314c699__msgfile" [color=red, label="[msgfile]"];
+"5c0cfabc-04ea-473f-89f0-cd9e1314c699" -> "5c0cfabc-04ea-473f-89f0-cd9e1314c699__msgfile";
+}
+
+}
+
+"5c0cfabc-04ea-473f-89f0-cd9e1314c699__msgfile" -> "453069ec-a1b8-44da-a683-b3abf2881926";
+"dda5ded4-eb47-40ac-9de0-79ed7e9f555d__msg" -> "5c0cfabc-04ea-473f-89f0-cd9e1314c699";
+}

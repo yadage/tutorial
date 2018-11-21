@@ -1,0 +1,456 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Introduction · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter active" data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Introduction</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="tutorial">tutorial</h1>
+<h2 id="installing">Installing</h2>
+<p>If you are on your laptop you can install yadage via</p>
+<pre><code>pip install yadage
+</code></pre><p>If you&apos;d like to visualize workflows add <code>[viz]</code> to the command
+in order to install the necessary dependencies</p>
+<pre><code>pip install yadage[viz]
+</code></pre><h3 id="using-on-lxplus-at-cern-for-high-energy-physicists">Using on LXPLUS at CERN (for high energy physicists)</h3>
+<p>Usually you cannot easily install custom python packages on LXPLUS, 
+therefore a pre-setup version is installed and usable from the 
+<code>lxplus-cloud</code> flavor of nodes</p>
+<pre><code>ssh lxplus-cloud.cern.ch
+source ~recast/public/setup.sh
+</code></pre><h2 id="where-is-this-going">Where is this going?</h2>
+<p>In this tutorial we will build a simple workflow that runs two tasks one 
+after the other.</p>
+<ol>
+<li><p>The first task runs a program that takes in a message string and writes
+it out to an output file</p>
+<p>The program that does this is written in C++</p>
+</li>
+</ol>
+<ol>
+<li><p>The second tasks reads in the file written by the first task and transforms
+its contents into all upper case letters</p>
+<p>The program for this step is writte in Python.</p>
+</li>
+</ol>
+<p><img src="assets/message_example.png" alt="example image" title="The message workflow"></p>
+<h2 id="building-docker-images">Building Docker Images</h2>
+<p><strong>Note for LXPLUS</strong> Image building is not yet suppored there. Feel free to read along or try this out on your personal laptop, or if you want to jump to the next section go to <a href="https://github.com/yadage/tutorial#writing-individual-job-templates" target="_blank"><strong>Writing Individual Job Templates</strong></a>.</p>
+<p>One of the main ideas of yadage is to orchestrate workflows where each step
+in the workflow runs in its own sandbox. This efficiently separates the domain-
+specific code in the sandbox from the workflow logic.</p>
+<p>As a sandboxing technology Linux Containers that you can e.g. build with <code>docker</code> are 
+very popular. For this tutorial we are building two container images, one for
+the C++ program and one for the Python program.</p>
+<p>The images are already built and available at </p>
+<p><a href="https://hub.docker.com/r/yadage/tutorial-messagewriter/" target="_blank">https://hub.docker.com/r/yadage/tutorial-messagewriter/</a></p>
+<p>and </p>
+<p><a href="https://hub.docker.com/r/yadage/tutorial-uppermaker/" target="_blank">https://hub.docker.com/r/yadage/tutorial-uppermaker/</a></p>
+<p>if you want to build them yourself you can do</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> images/message_writer
+docker build -t &lt;username&gt;/tutorial-messagewriter .
+docker push &lt;username&gt;/tutorial-messagewriter
+</code></pre>
+<p>or</p>
+<pre><code>cd images/message_writer
+docker build -t &lt;username&gt;/tutorial-uppermaker .
+docker push &lt;username&gt;/tutorial-uppermaker
+</code></pre><p>where <code>&lt;username&gt;</code> is your Docker Hub username. This will assemble the
+Docker images on your laptop (<code>docker build</code>). In the case of the C++
+program it will compile the program while for the Python program it will
+simply copy the program into the container image.</p>
+<p>The images then contain all dependencies. That is, not only the programs
+themselves but also the operating system and programming language runtime
+(C++ and Python respectively) needed to <em>execute</em> the programs as well.</p>
+<h3 id="testing-the-images">Testing the images</h3>
+<p>As the images include all dependencies we can now &apos;pull&apos; the Docker image
+on any other computer and run the programs</p>
+<pre><code>docker run --rm -it yadage/tutorial-messagewriter sh
+/code # /code/message_writer hello outputfile.txt
+Hello World. We will write this message: hello
+Done! try looking into outputfile.txt
+/code # cat outputfile.txt 
+Hello, the message was: hello
+/code # exit
+</code></pre><p>Note, how after you exit all traces of the container and the output file you just created
+are gone. The advantage of Linux Container technology is <em>isolation</em> and containers
+that you run using <code>docker run</code> are <em>ephemeral</em>.</p>
+<p>Each new container that you run using <code>docker run</code> starts off in exactly the same state, 
+which is great for reproducibility. </p>
+<p>We can also test the second container image</p>
+<pre><code>/ # echo shout this &gt; input.txt
+/ # python /code/uppermaker.py input.txt output.txt
+INFO:uppermaker:Hello There, we will take the contents of input.txt
+INFO:uppermaker:and make them all UPPER CASE!!
+INFO:uppermaker:Find the result in output.txt
+/ # cat output.txt 
+SHOUT THIS
+/ # exit
+</code></pre><h4 id="sharing-state">Sharing State</h4>
+<p>While the ephemeral nature of containers is nice, sometimes you do want to persist some
+data that you created within the container, perhaps because you want to do something else
+with this. For this we can <em>loosen</em> the strict isolation of the container a bit and
+&apos;mount* a directory from the host computer into the container</p>
+<pre><code>docker run --rm -it -v $PWD/savehere:/data yadage/tutorial-messagewriter sh
+/code # /code/message_writer hello /data/outputfile.txt
+/code # cat /data/outputfile.txt 
+Hello, the message was: hello
+/code # exit
+</code></pre><p><code>-v  $PWD/savehere:/data</code> instructs docker to map the <code>$PWD/savehere</code> directory on your
+host computer into the <code>/data</code> directory within the container. So files that you write 
+into <code>/data</code> within the container get persisted.</p>
+<p>We can now see the output file in <code>savehere/outputfile.txt</code></p>
+<pre><code>cat savehere/outputfile.txt
+Hello, the message was: hello
+</code></pre><pre><code>docker run --rm -it -v $PWD/savehere:/data yadage/tutorial-uppermaker sh
+/ # python /code/uppermaker.py /data/outputfile.txt /data/secondfile.txt
+/ # exit
+cat savehere/secondfile.txt 
+HELLO, THE MESSAGE WAS: HELLO
+</code></pre><p>This seems great! we can use pre-packaged software archived in docker images to run the series of commands
+that we want. But we had to manage a lot of things by hand: e.g. running Docker with the right flags to 
+persist the data and executing the commands in the right order. I.e. we needed to exactly know <em>how</em> to do 
+these things, which is sometimes referred to as a &quot;imperative style&quot; or computing.</p>
+<p>In the following we will now introduce a more &quot;declarative&quot; style in which we only specify <em>what</em> we want
+to do and let a &quot;workflow engine&quot;, i.e. <code>yadage</code>, figure out <em>how</em> to do it.</p>
+<h2 id="writing-individual-job-templates">Writing Individual Job Templates</h2>
+<p>Looking at the commands above, we notice that a lot of the commands we executed depended on some specifics
+of how we ran the containers and the exact paths of files we use as input and output. </p>
+<p>In order to make re-usable workflows we need to replace the concrete commands
+but rather &quot;command templates&quot; such that we or the workflow engine can use these
+templates to create <em>new commands</em> once we e.g. have the correct inputs available.</p>
+<p>In order to fully specify <em>what</em> we want to do we need to provide three ingredients</p>
+<ol>
+<li>The Command Template: a parametrized version of the command line </li>
+<li>An Output Specification: What are we achieving with running the command
+constructed from 1.
+I.e. what are the interesting files that are being produced here.</li>
+<li>An Environment Specification: Where do we run this command? Here we can
+specify the Docker image which holds the right program within itself.</li>
+</ol>
+<h3 id="the-message-task">The Message Task</h3>
+<p>A simple example of the message writing task we ran above is shown below. Put this into
+a file <code>steps.yml</code>.</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">messagewriter:</span>
+<span class="hljs-attr">  process:</span>
+<span class="hljs-attr">    process_type:</span> interpolated-script-cmd
+<span class="hljs-attr">    script:</span> <span class="hljs-string">|
+      /code/message_writer &apos;{message}&apos; {outputfile}
+</span><span class="hljs-attr">  publisher:</span>
+<span class="hljs-attr">    publisher_type:</span> interpolated-pub
+<span class="hljs-attr">    publish:</span>
+<span class="hljs-attr">      msgfile:</span> <span class="hljs-string">&apos;{outputfile}&apos;</span>
+<span class="hljs-attr">  environment:</span>
+<span class="hljs-attr">    environment_type:</span> docker-encapsulated
+<span class="hljs-attr">    image:</span> yadage/tutorial-messagewriter
+</code></pre>
+<p>We can check that we wrote this specification correctly by running:</p>
+<pre><code>packtivity-validate steps.yml#/messagewriter
+</code></pre><p>which should show</p>
+<pre><code>packtivity definition is valid
+</code></pre><p>We can now execute this task by passing only the <code>message</code> and <code>outputfile</code> parameters as well as a writable directory
+without needing to specify the command or interacting with <code>docker</code> at all.</p>
+<pre><code>packtivity-run steps.yml#/messagewriter -p message=&quot;Hi there.&quot; -p outputfile=&quot;&apos;{workdir}/outputfile.txt&apos;&quot; --write first
+&lt;TypedLeafs: {u&apos;msgfile&apos;: u&apos;/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/outputfile.txt&apos;}&gt; (prepublished)
+2018-11-20 23:04:30,392 | pack.packtivity_sync |   INFO | starting file logging for topic: step
+&lt;TypedLeafs: {u&apos;msgfile&apos;: u&apos;/Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/first/outputfile.txt&apos;}&gt; (post-run)
+</code></pre><p>The last line shows what the interesting output of this task is. hen we look at it we see our message</p>
+<pre><code>cat first/outputfile.txt
+</code></pre><p>which shows</p>
+<pre><code>Hello, the message was: Hi there.
+</code></pre><h3 id="the-shouting-task">The Shouting Task</h3>
+<p>We can do the same thing for the task that converts a file into upper case. We add the second
+spec <code>uppermaker</code> to <code>steps.yml</code></p>
+<pre><code class="lang-yaml"><span class="hljs-attr">messagewriter:</span>
+<span class="hljs-attr">  process:</span>
+<span class="hljs-attr">    process_type:</span> interpolated-script-cmd
+<span class="hljs-attr">    script:</span> <span class="hljs-string">|
+      /code/message_writer &apos;{message}&apos; {outputfile}
+</span><span class="hljs-attr">  publisher:</span>
+<span class="hljs-attr">    publisher_type:</span> interpolated-pub
+<span class="hljs-attr">    publish:</span>
+<span class="hljs-attr">      msgfile:</span> <span class="hljs-string">&apos;{outputfile}&apos;</span>
+<span class="hljs-attr">  environment:</span>
+<span class="hljs-attr">    environment_type:</span> docker-encapsulated
+<span class="hljs-attr">    image:</span> yadage/tutorial-messagewriter
+
+<span class="hljs-attr">upppermaker:</span>
+<span class="hljs-attr">  process:</span>
+<span class="hljs-attr">    process_type:</span> interpolated-script-cmd
+<span class="hljs-attr">    script:</span> <span class="hljs-string">|
+      python /code/uppermaker.py {inputfile} {outputfile}
+</span><span class="hljs-attr">  publisher:</span>
+<span class="hljs-attr">    publisher_type:</span> interpolated-pub
+<span class="hljs-attr">    publish:</span>
+<span class="hljs-attr">      shoutingfile:</span> <span class="hljs-string">&apos;{outputfile}&apos;</span>
+<span class="hljs-attr">  environment:</span>
+<span class="hljs-attr">    environment_type:</span> docker-encapsulated
+<span class="hljs-attr">    image:</span> yadage/tutorial-uppermaker
+</code></pre>
+<p>We can check again that we defined this correctly (at least syntax-wise)</p>
+<pre><code>packtivity-validate steps.yml#/upppermaker
+packtivity definition is valid
+</code></pre><p>We can now run this task like the one before. In contrast to the first command line we pass in not only a 
+writable directory (<code>second</code>) but also a directory from which we read in the data (<code>first</code>)</p>
+<p><code>packtivity-run</code> will then handle running the <code>docker commands</code> with the volume mounts and commands</p>
+<pre><code>packtivity-run steps.yml#/upppermaker -p inputfile=&quot;$PWD/first/outputfile.txt&quot; -p outputfile=&quot;&apos;{workdir}/outputfile.txt&apos;&quot; --write second --read first
+</code></pre><p>We can now see the output file</p>
+<pre><code>cat second/outputfile.txt
+</code></pre><p>which shows</p>
+<pre><code>HELLO, THE MESSAGE WAS: HI THERE.
+</code></pre><p>So have we achieved? We still need to run two tasks manually, but the information of how the commands are constructed and which environment
+is needed is all stored in a text file that can be shared across users. </p>
+<p>In the next step we will declaratively describe the workflow of running the two tasks in order and how to wire the output
+of one task to be the input of the next task.</p>
+<h2 id="writing-the-workflow">Writing the Workflow</h2>
+<p>A workflow can be represented as a <em>directed acyclic graph</em> of tasks. In order to describe the workflow, 
+we define a set of &quot;stages&quot; which serve as a recipe on how to construct such a graph, i.e. which nodes and
+which edges need to be added to the graph.</p>
+<p>Write this into a file <code>workflow.yml</code></p>
+<pre><code class="lang-yaml"><span class="hljs-attr">stages:</span>
+<span class="hljs-attr">- name:</span> writing_stage
+<span class="hljs-attr">  dependencies:</span> [init]
+<span class="hljs-attr">  scheduler:</span>
+<span class="hljs-attr">    scheduler_type:</span> singlestep-stage
+<span class="hljs-attr">    parameters:</span>
+<span class="hljs-attr">      message:</span> {step: init, output: msg}
+<span class="hljs-attr">      outputfile:</span> <span class="hljs-string">&apos;{workdir}/outputfile.txt&apos;</span>
+<span class="hljs-attr">    step:</span> {$ref: <span class="hljs-string">&apos;steps.yml#/messagewriter&apos;</span>}
+<span class="hljs-attr">- name:</span> shouting_stage
+<span class="hljs-attr">  dependencies:</span> [writing_stage]
+<span class="hljs-attr">  scheduler:</span>
+<span class="hljs-attr">    scheduler_type:</span> singlestep-stage
+<span class="hljs-attr">    parameters:</span>
+<span class="hljs-attr">      inputfile:</span> {step: writing_stage, output: msgfile}
+<span class="hljs-attr">      outputfile:</span> <span class="hljs-string">&apos;{workdir}/outputfile.txt&apos;</span>
+<span class="hljs-attr">    step:</span> {$ref: <span class="hljs-string">&apos;steps.yml#/upppermaker&apos;</span>}
+</code></pre>
+<p>We can check that we did everything right via</p>
+<pre><code>yadage-validate workflow.yml
+</code></pre><p>We can now run the following command using <code>yadage-run</code>, where the only thing we pass is the <code>msg</code>
+parameter to the workflow. This workflow input will then serve as the <code>message</code> parameter of the
+first stage (the <code>outputfile</code> parameter is hardcoded into the workflow spec.)</p>
+<p>The result of the task scheduled by the <code>writing_stage</code> will be the file published under the <code>msgfile</code>
+(as defined in the publisher of the <code>steps.yml#/messagewriter</code> job template)</p>
+<p>For the second task the <code>msgfile</code> output is then tied to the <code>inputfile</code> parmeter of the <code>steps.yml#/upppermaker</code>
+task. Again, the output file is hardcoded.</p>
+<p>The full command looks now like this:</p>
+<pre><code>yadage-run workdir workflow.yml -p msg=&apos;Hi there.&apos; --visualize
+</code></pre><p>Notice how all details of the workflow: which tasks to run, in which order to run them, the software environments
+for each task, the commands of the tasks are all stored in text files now that are archivable and sharable. The 
+execution of this workflow only requires a single <code>msg</code> parameter.</p>
+<p>After the workflow runs we can see the outputs of both tasks in the work directory:</p>
+<pre><code>cat workdir/writing_stage/outputfile.txt
+Hello, the message was: Hi there.
+</code></pre><pre><code>cat workdir/shouting_stage/outputfile.txt
+HELLO, THE MESSAGE WAS: HI THERE.
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2018-11-21T13:27:11.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-21T18:59:38.320Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

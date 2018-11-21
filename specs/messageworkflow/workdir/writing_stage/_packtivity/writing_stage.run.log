@@ -1,0 +1,3 @@
+2018-11-20 22:25:26,324 | pack.writing_stage.r |   INFO | starting file logging for topic: run
+2018-11-20 22:25:27,146 | pack.writing_stage.r |   INFO | Hello World. We will write this message: Hi there.
+2018-11-20 22:25:27,152 | pack.writing_stage.r |   INFO | Done! try looking into /Users/lukas/Code/yadagedev/tutorial/specs/messageworkflow/workdir/writing_stage/outputfile.txt

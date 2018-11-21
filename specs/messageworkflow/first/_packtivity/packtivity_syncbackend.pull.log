@@ -1,0 +1,4 @@
+2018-11-20 23:04:30,555 | pack.packtivity_sync |   INFO | starting file logging for topic: pull
+2018-11-20 23:04:33,019 | pack.packtivity_sync |   INFO | latest: Pulling from yadage/tutorial-messagewriter
+2018-11-20 23:04:33,020 | pack.packtivity_sync |   INFO | Digest: sha256:11a10c950a0e1971affe60e9d4dda9ccb43f995c8b5f4908e1b906be9936c370
+2018-11-20 23:04:33,020 | pack.packtivity_sync |   INFO | Status: Image is up to date for yadage/tutorial-messagewriter:latest
