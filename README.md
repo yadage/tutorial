@@ -1,4 +1,4 @@
-# tutorial
+# Yadage Tutorial
 
 ## Installing
 
