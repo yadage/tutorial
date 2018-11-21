@@ -43,6 +43,8 @@ after the other.
 
    The program for this step is writte in Python.
 
+![example image](./assets/message_example.png "The message workflow")
+
 
 ## Building Docker Images
 
