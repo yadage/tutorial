@@ -1,0 +1,4 @@
+2018-12-03 17:37:49,668 |  pack.mapping_3.pull |   INFO | starting file logging for topic: pull
+2018-12-03 17:37:52,224 |  pack.mapping_3.pull |   INFO | latest: Pulling from library/busybox
+2018-12-03 17:37:52,695 |  pack.mapping_3.pull |   INFO | Digest: sha256:2a03a6059f21e150ae84b0973863609494aad70f0a80eaeb64bddd8d92465812
+2018-12-03 17:37:52,695 |  pack.mapping_3.pull |   INFO | Status: Image is up to date for busybox:latest

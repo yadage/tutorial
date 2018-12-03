@@ -1,0 +1,62 @@
+2018-12-03 17:37:55,657 |  pack.mapping_2.step |   INFO | starting file logging for topic: step
+2018-12-03 17:37:55,767 |  pack.mapping_2.step |  DEBUG | script is:
+2018-12-03 17:37:55,767 |  pack.mapping_2.step |  DEBUG | 
+--------------
+wc -w /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00003.txt |awk '{print $1}' > /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/output.txt
+
+--------------
+2018-12-03 17:37:55,767 |  pack.mapping_2.step |  DEBUG | 
+--------------
+run in docker container image: busybox
+with env: default env
+resources: []
+--------------
+    
+2018-12-03 17:37:55,768 |  pack.mapping_2.step |  DEBUG | do_auth: False do_cvmfs: False
+2018-12-03 17:37:55,782 |  pack.mapping_2.step |  DEBUG | rspec is
+{
+    "mounts": [
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata", 
+            "type": "bind"
+        }
+    ], 
+    "image": "busybox:latest", 
+    "workdir": null, 
+    "argv": [
+        "sh", 
+        "-c", 
+        "sh"
+    ], 
+    "stdin": "wc -w /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00003.txt |awk '{print $1}' > /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/output.txt\n"
+}
+2018-12-03 17:37:55,782 |  pack.mapping_2.step |  DEBUG | command: 
+docker pull busybox:latest
+2018-12-03 17:37:55,782 |  pack.mapping_2.step |  DEBUG | stdin if any: None
+2018-12-03 17:37:55,833 |  pack.mapping_2.step |  DEBUG | started subprocess with pid 86584. now wait to finish
+2018-12-03 17:37:56,364 |  pack.mapping_2.step |  DEBUG | process children: []
+2018-12-03 17:37:58,030 |  pack.mapping_2.step |  DEBUG | container execution subprocess finished. return code: 0
+2018-12-03 17:37:58,031 |  pack.mapping_2.step |  DEBUG | moving on from subprocess execution: docker pull busybox:latest
+2018-12-03 17:37:58,031 |  pack.mapping_2.step |  DEBUG | finally for docker pull busybox:latest
+2018-12-03 17:37:58,031 |  pack.mapping_2.step |  DEBUG | command: 
+docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/_packtivity/mapping_2.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata:rw busybox:latest sh -c sh
+2018-12-03 17:37:58,032 |  pack.mapping_2.step |  DEBUG | stdin if any: wc -w /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00003.txt |awk '{print $1}' > /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/output.txt
+
+2018-12-03 17:37:58,033 |  pack.mapping_2.step |  DEBUG | stdin: 
+wc -w /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00003.txt |awk '{print $1}' > /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/output.txt
+
+2018-12-03 17:37:58,034 |  pack.mapping_2.step |  DEBUG | argv: ['docker', 'run', '--rm', '-i', '--cidfile', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/_packtivity/mapping_2.cid', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata:rw', 'busybox:latest', 'sh', '-c', 'sh']
+2018-12-03 17:37:58,049 |  pack.mapping_2.step |  DEBUG | started subprocess with pid 86591. now wait to finish
+2018-12-03 17:37:58,583 |  pack.mapping_2.step |  DEBUG | process children: []
+2018-12-03 17:38:00,430 |  pack.mapping_2.step |  DEBUG | container execution subprocess finished. return code: 0
+2018-12-03 17:38:00,431 |  pack.mapping_2.step |  DEBUG | moving on from subprocess execution: docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/_packtivity/mapping_2.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata:rw busybox:latest sh -c sh
+2018-12-03 17:38:00,431 |  pack.mapping_2.step |  DEBUG | finally for docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/_packtivity/mapping_2.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata:rw busybox:latest sh -c sh
+2018-12-03 17:38:00,457 |  pack.mapping_2.step |   INFO | publishing data: <TypedLeafs: {u'wordcount': u'/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/output.txt'}>

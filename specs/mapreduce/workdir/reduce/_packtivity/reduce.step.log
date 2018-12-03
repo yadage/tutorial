@@ -1,0 +1,116 @@
+2018-12-03 17:38:06,261 |     pack.reduce.step |   INFO | starting file logging for topic: step
+2018-12-03 17:38:07,124 |     pack.reduce.step |  DEBUG | script is:
+2018-12-03 17:38:07,125 |     pack.reduce.step |  DEBUG | 
+--------------
+cat /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9/output.txt | awk '{a+=$1} END {print a}'> /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce/output.txt
+
+--------------
+2018-12-03 17:38:07,125 |     pack.reduce.step |  DEBUG | 
+--------------
+run in docker container image: busybox
+with env: default env
+resources: []
+--------------
+    
+2018-12-03 17:38:07,125 |     pack.reduce.step |  DEBUG | do_auth: False do_cvmfs: False
+2018-12-03 17:38:07,126 |     pack.reduce.step |  DEBUG | rspec is
+{
+    "mounts": [
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8", 
+            "type": "bind"
+        }, 
+        {
+            "source": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9", 
+            "readonly": false, 
+            "destination": "/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9", 
+            "type": "bind"
+        }
+    ], 
+    "image": "busybox:latest", 
+    "workdir": null, 
+    "argv": [
+        "sh", 
+        "-c", 
+        "sh"
+    ], 
+    "stdin": "cat /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9/output.txt | awk '{a+=$1} END {print a}'> /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce/output.txt\n"
+}
+2018-12-03 17:38:07,130 |     pack.reduce.step |  DEBUG | command: 
+docker pull busybox:latest
+2018-12-03 17:38:07,131 |     pack.reduce.step |  DEBUG | stdin if any: None
+2018-12-03 17:38:07,151 |     pack.reduce.step |  DEBUG | started subprocess with pid 86600. now wait to finish
+2018-12-03 17:38:07,679 |     pack.reduce.step |  DEBUG | process children: []
+2018-12-03 17:38:09,367 |     pack.reduce.step |  DEBUG | container execution subprocess finished. return code: 0
+2018-12-03 17:38:09,367 |     pack.reduce.step |  DEBUG | moving on from subprocess execution: docker pull busybox:latest
+2018-12-03 17:38:09,368 |     pack.reduce.step |  DEBUG | finally for docker pull busybox:latest
+2018-12-03 17:38:09,368 |     pack.reduce.step |  DEBUG | command: 
+docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce/_packtivity/reduce.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9:rw busybox:latest sh -c sh
+2018-12-03 17:38:09,369 |     pack.reduce.step |  DEBUG | stdin if any: cat /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9/output.txt | awk '{a+=$1} END {print a}'> /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce/output.txt
+
+2018-12-03 17:38:09,370 |     pack.reduce.step |  DEBUG | stdin: 
+cat /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8/output.txt /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9/output.txt | awk '{a+=$1} END {print a}'> /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce/output.txt
+
+2018-12-03 17:38:09,375 |     pack.reduce.step |  DEBUG | argv: ['docker', 'run', '--rm', '-i', '--cidfile', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce/_packtivity/reduce.cid', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8:rw', '-v', '/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9:rw', 'busybox:latest', 'sh', '-c', 'sh']
+2018-12-03 17:38:09,387 |     pack.reduce.step |  DEBUG | started subprocess with pid 86602. now wait to finish
+2018-12-03 17:38:09,912 |     pack.reduce.step |  DEBUG | process children: []
+2018-12-03 17:38:11,126 |     pack.reduce.step |  DEBUG | container execution subprocess finished. return code: 0
+2018-12-03 17:38:11,127 |     pack.reduce.step |  DEBUG | moving on from subprocess execution: docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce/_packtivity/reduce.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9:rw busybox:latest sh -c sh
+2018-12-03 17:38:11,127 |     pack.reduce.step |  DEBUG | finally for docker run --rm -i --cidfile /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce/_packtivity/reduce.cid     -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8:rw -v /Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9:/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9:rw busybox:latest sh -c sh
+2018-12-03 17:38:11,152 |     pack.reduce.step |   INFO | publishing data: <TypedLeafs: {u'combined_counts': u'/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/reduce/output.txt'}>

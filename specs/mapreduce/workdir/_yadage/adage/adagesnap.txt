@@ -1,0 +1,29 @@
+========== ADAGE LOG BEGIN at 2018-12-03T17:37:43.518791 ==========
+---------- snapshot at 2018-12-03T17:37:43.518961
+---------- snapshot at 2018-12-03T17:37:47.374110
+name: init obj: </init:0|defined|known> submitted: True
+name: mapping_8 obj: </mapping:8|defined|known> submitted: False
+name: mapping_1 obj: </mapping:1|defined|known> submitted: False
+name: mapping_3 obj: </mapping:3|defined|known> submitted: False
+name: mapping_9 obj: </mapping:9|defined|known> submitted: False
+name: mapping_5 obj: </mapping:5|defined|known> submitted: False
+name: mapping_2 obj: </mapping:2|defined|known> submitted: False
+name: mapping_7 obj: </mapping:7|defined|known> submitted: False
+name: mapping_0 obj: </mapping:0|defined|known> submitted: False
+name: mapping_6 obj: </mapping:6|defined|known> submitted: False
+name: mapping_4 obj: </mapping:4|defined|known> submitted: False
+name: reduce obj: </reduce:0|defined|known> submitted: False
+---------- snapshot at 2018-12-03T17:38:41.889888
+name: init obj: </init:0|success|known> submitted: True
+name: mapping_8 obj: </mapping:8|success|known> submitted: True
+name: mapping_1 obj: </mapping:1|success|known> submitted: True
+name: mapping_3 obj: </mapping:3|success|known> submitted: True
+name: mapping_9 obj: </mapping:9|success|known> submitted: True
+name: mapping_5 obj: </mapping:5|success|known> submitted: True
+name: mapping_2 obj: </mapping:2|success|known> submitted: True
+name: mapping_7 obj: </mapping:7|success|known> submitted: True
+name: mapping_0 obj: </mapping:0|success|known> submitted: True
+name: mapping_6 obj: </mapping:6|success|known> submitted: True
+name: mapping_4 obj: </mapping:4|success|known> submitted: True
+name: reduce obj: </reduce:0|success|known> submitted: True
+========== ADAGE LOG END at 2018-12-03T17:38:41.891392 ==========
