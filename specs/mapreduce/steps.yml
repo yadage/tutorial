@@ -1,0 +1,25 @@
+count_words_in_file:
+  process:
+    process_type: interpolated-script-cmd
+    script: |
+      wc -w {inputfile} |awk '{{print $1}}' > {outputfile}
+  environment:
+    environment_type: docker-encapsulated
+    image: 'busybox'
+  publisher:
+    publisher_type: interpolated-pub
+    publish:
+      wordcount: '{outputfile}'
+
+combine_wordcounts:
+  process:
+    process_type: interpolated-script-cmd
+    script: |
+      cat {inputfiles} | awk '{{a+=$1}} END {{print a}}'> {outputfile}
+  environment:
+    environment_type: docker-encapsulated
+    image: 'busybox'
+  publisher:
+    publisher_type: interpolated-pub
+    publish:
+      combined_counts: '{outputfile}'

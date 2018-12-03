@@ -1,0 +1,22 @@
+stages:
+- name: mapping
+  dependencies: [init]
+  scheduler:
+    scheduler_type: 'multistep-stage'
+    parameters:
+      inputfile: {step: init, output: files}
+      outputfile: '{workdir}/output.txt'
+    scatter:
+      method: zip
+      parameters: [inputfile]
+    step: {$ref: 'steps.yml#/count_words_in_file'}
+
+- name: reduce
+  dependencies: [mapping]
+  scheduler:
+    scheduler_type: 'singlestep-stage'
+    parameters:
+      inputfiles: {steps: mapping, output: wordcount}
+      outputfile: '{workdir}/output.txt'
+
+    step: {$ref: 'steps.yml#/combine_wordcounts'}
