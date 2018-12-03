@@ -1,0 +1,445 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Example: Map-Reduce · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="GettingStarted.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="GettingStarted.html">
+            
+                <a href="GettingStarted.html">
+            
+                    
+                    Getting Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="MapReduce.html">
+            
+                <a href="MapReduce.html">
+            
+                    
+                    Example: Map-Reduce
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Example: Map-Reduce</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="map-reduce---parallel-processing-of-data">Map Reduce - Parallel Processing of Data</h1>
+<h2 id="where-is-this-going">Where is this going?</h2>
+<p>This example will walk you through a simple &quot;Map-Reduce&quot; style workflow in which 
+a number of work items are processed in parallel and then a summary job combined
+the outputs of the work items into a single output.</p>
+<p>The final workflow will look like this:</p>
+<p><img src="assets/mapreduce_example.png" alt="example image" title="The Map-Reduce workflow"></p>
+<h2 id="preparation-making-some-dummy-input-data">Preparation: Making Some Dummy input Data</h2>
+<p>In this case, we will consider the generation of the input data to <em>not</em> be part of the workflow, but rather
+assume, that we already have some input files available. Here, we will create a directory and generate ten
+text files:</p>
+<pre><code>mkdir inputdata
+for i in $(seq -f &quot;%05g&quot; 1 10);do echo &quot;Hello $i&quot; &gt; inputdata/input_$i.txt;done
+</code></pre><p>Voila:</p>
+<pre><code>ls -lrt inputdata
+total 40
+-rw-r--r-- 1 lukas staff 12 Dec  3 16:16 input_00001.txt
+-rw-r--r-- 1 lukas staff 12 Dec  3 16:16 input_00002.txt
+-rw-r--r-- 1 lukas staff 12 Dec  3 16:16 input_00003.txt
+-rw-r--r-- 1 lukas staff 12 Dec  3 16:16 input_00004.txt
+-rw-r--r-- 1 lukas staff 12 Dec  3 16:16 input_00005.txt
+-rw-r--r-- 1 lukas staff 12 Dec  3 16:16 input_00006.txt
+-rw-r--r-- 1 lukas staff 12 Dec  3 16:16 input_00007.txt
+-rw-r--r-- 1 lukas staff 12 Dec  3 16:16 input_00008.txt
+-rw-r--r-- 1 lukas staff 12 Dec  3 16:16 input_00009.txt
+-rw-r--r-- 1 lukas staff 12 Dec  3 16:16 input_00010.txt
+</code></pre><h3 id="counting-words-in-a-file">Counting Words in a File:</h3>
+<p>For each file we want to count the number of words in it. Therefore we will provide a 
+packtivity definition as follows (for convenient we will put the definition under
+a file <code>steps.yml</code> and identify it with the name <code>count_words_in_file</code>):</p>
+<pre><code>count_words_in_file:
+  process:
+    process_type: interpolated-script-cmd
+    script: |
+      wc -w {inputfile} |awk &apos;{{print $1}}&apos; &gt; {outputfile}
+  environment:
+    environment_type: docker-encapsulated
+    image: &apos;busybox&apos;
+  publisher:
+    publisher_type: interpolated-pub
+    publish:
+      wordcount: &apos;{outputfile}&apos;
+</code></pre><p>Let&apos;s go through the sections</p>
+<ol>
+<li>... </li>
+<li>...</li>
+<li>...</li>
+</ol>
+<p>Let&apos;s make sure we got the syntax correct:</p>
+<pre><code>packtivity-validate &apos;steps.yml#/count_words_in_file&apos;
+packtivity definition is valid
+</code></pre><h4 id="testing">Testing</h4>
+<p>We can test this packtivity on a single file like this:</p>
+<pre><code>packtivity-run &apos;steps.yml#/count_words_in_file&apos; \
+-p inputfile=$PWD/inputdata/input_00010.txt \
+-p outputfile=&quot;&apos;{workdir}/output.txt&apos;&quot; \
+--read inputdata \
+--write test_counting
+</code></pre><pre><code>cat test_counting/output.txt 
+2
+</code></pre><h3 id="write-the-workflow-part-1">Write the Workflow (part 1)</h3>
+<p>First, let&apos;s learn how to pass input data to the workflow by starting with an empty workflow:</p>
+<p>In a file called: <code>workflow.yml</code>, just put a single line:</p>
+<pre><code>stages: []
+</code></pre><p>this is a workflow that does not do anything, but initialize itself. Let&apos;s pass in some input data:</p>
+<pre><code>yadage-run workdir workflow.yml -p files=&apos;&quot;*.txt&quot;&apos; -d initdir=$PWD/inputdata --visualize
+</code></pre><p><img src="assets/mapreduce_example_justinput.png" alt="example image" title="The Map-Reduce workflow"></p>
+<p>That is, the workflow is initialized such that the special <code>init</code> stage has as its &quot;output&quot; the ten
+textfiles we just created. To see how to access references to these files from within the workflow
+we can use the <code>yadage-util</code> command line tool to test a selection </p>
+<pre><code>yadage-util testsel workdir/_yadage/yadage_snapshot_workflow.json &apos;{step: init, output: files}&apos;
+[
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00001.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00002.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00003.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00004.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00005.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00006.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00007.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00008.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00009.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/inputdata/input_00010.txt&quot;
+]
+</code></pre><p>That is, when used within a workflow spec <code>{step: init, output: files}</code> will resolve to this array of filenames.</p>
+<h4 id="writing-the-mapping-stage">Writing the mapping stage:</h4>
+<p>We will now use the selection expression <code>{step: init, output: files}</code> to extend the workflow and schedule 
+one processing step for each input file:</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">stages:</span>
+<span class="hljs-attr">- name:</span> mapping
+<span class="hljs-attr">  dependencies:</span> [init]
+<span class="hljs-attr">  scheduler:</span>
+<span class="hljs-attr">    scheduler_type:</span> <span class="hljs-string">&apos;multistep-stage&apos;</span>
+<span class="hljs-attr">    parameters:</span>
+<span class="hljs-attr">      inputfile:</span> {step: init, output: files}
+<span class="hljs-attr">      outputfile:</span> <span class="hljs-string">&apos;{workdir}/output.txt&apos;</span>
+<span class="hljs-attr">    scatter:</span>
+<span class="hljs-attr">      method:</span> zip
+<span class="hljs-attr">      parameters:</span> [inputfile]
+<span class="hljs-attr">    step:</span> {$ref: <span class="hljs-string">&apos;steps.yml#/count_words_in_file&apos;</span>}
+</code></pre>
+<pre><code>rm -rf workdir
+yadage-run workdir workflow.yml -p files=&apos;&quot;*.txt&quot;&apos; -d initdir=$PWD/inputdata --visualize
+</code></pre><p><img src="assets/mapreduce_example_withmapstage.png" alt="example image" title="The Map-Reduce workflow"></p>
+<h3 id="combining-word-counts">Combining Word Counts</h3>
+<p>We now have the workflow in shape to process all files in parallel. We can now test a
+selection to see how to get file references to the outputfiles of these individual
+steps:</p>
+<pre><code>yadage-util testsel workdir/_yadage/yadage_snapshot_workflow.json &apos;{steps: mapping, output: wordcount}&apos;
+[
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9/output.txt&quot;
+]
+</code></pre><h4 id="writing-a-packtivity">Writing a Packtivity</h4>
+<p>Armed with such a list of files, we can now write a new packtivity that will read the
+contents of each file (which will be the word counts from their respective input files)
+and add them up using the <code>awk</code> utility</p>
+<pre><code>combine_wordcounts:
+  process:
+    process_type: interpolated-script-cmd
+    script: |
+      cat {inputfiles} | awk &apos;{{a+=$1}} END {{print a}}&apos;&gt; {outputfile}
+  environment:
+    environment_type: docker-encapsulated
+    image: &apos;busybox&apos;
+  publisher:
+    publisher_type: interpolated-pub
+    publish:
+      combined_counts: &apos;{outputfile}&apos;
+</code></pre><p>As always, make sure we at least pass a superficial syntax check:</p>
+<pre><code>packtivity-validate &apos;steps.yml#/combine_wordcounts&apos;
+packtivity definition is valid
+</code></pre><p>To test this packtivity spec, we can use the above input list to generate a input JSON document
+for the packtivity which will have the structure </p>
+<pre><code>{&quot;inputfiles: [...list of iles...], &quot;outputfile&quot;: &quot;{workdir}/output.txt&quot;}
+</code></pre><p>To generate this input doc, we will use the <code>jq</code> utility</p>
+<pre><code>yadage-util testsel \
+workdir/_yadage/yadage_snapshot_workflow.json &apos;{steps: mapping, output: wordcount}&apos; \
+|jq &apos;{inputfiles: ., outputfile: &quot;{workdir}/output.txt&quot;}&apos; &gt; test.json
+</code></pre><pre><code>cat test.json
+{
+  &quot;inputfiles&quot;: [
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_0/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_1/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_2/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_3/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_4/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_5/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_6/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_7/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_8/output.txt&quot;,
+    &quot;/Users/lukas/Code/yadagedev/tutorial/specs/mapreduce/workdir/mapping_9/output.txt&quot;
+  ],
+  &quot;outputfile&quot;: &quot;{workdir}/output.txt&quot;
+}
+</code></pre><pre><code>packtivity-run &apos;steps.yml#/combine_wordcounts&apos; test.json --write test_combination --read workdir
+</code></pre><p>Checking the output file, we see that it correctly combined the word count (2 words each in ten files)</p>
+<pre><code>cat test_combination/output.txt 
+20
+</code></pre><h3 id="writing-the-combination-stage">Writing the Combination Stage</h3>
+<p>We now add a single step stage to the workflow to do the equivalent thing we just did manually</p>
+<pre><code>stages:
+- name: mapping
+  dependencies: [init]
+  scheduler:
+    scheduler_type: &apos;multistep-stage&apos;
+    parameters:
+      inputfile: {step: init, output: files}
+      outputfile: &apos;{workdir}/output.txt&apos;
+    scatter:
+      method: zip
+      parameters: [inputfile]
+    step: {$ref: &apos;steps.yml#/count_words_in_file&apos;}
+
+- name: reduce
+  dependencies: [mapping]
+  scheduler:
+    scheduler_type: &apos;singlestep-stage&apos;
+    parameters:
+      inputfiles: {steps: mapping, output: wordcount}
+      outputfile: &apos;{workdir}/output.txt&apos;
+
+    step: {$ref: &apos;steps.yml#/combine_wordcounts&apos;}
+</code></pre><p>and run again:</p>
+<pre><code>rm -rf workdir
+yadage-run workdir workflow.yml -p files=&apos;&quot;*.txt&quot;&apos; -d initdir=$PWD/inputdata --visualize
+</code></pre><p>Let&apos;s check that the workflow worked out OK:</p>
+<pre><code>
+
+</code></pre>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="GettingStarted.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Getting Started">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Example: Map-Reduce","level":"1.3","depth":1,"previous":{"title":"Getting Started","level":"1.2","depth":1,"path":"GettingStarted.md","ref":"GettingStarted.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"MapReduce.md","mtime":"2018-12-03T16:47:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-12-03T16:49:11.139Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
